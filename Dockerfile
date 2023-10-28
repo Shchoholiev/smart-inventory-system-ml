@@ -7,18 +7,19 @@ FROM python:3.11.6-slim-bullseye
 # Turns off buffering for easier container logging
 # ENV PYTHONUNBUFFERED=1
 
-# Install pip requirements
-COPY requirements.txt .
-RUN python -m pip install -r requirements.txt
+WORKDIR /app
+COPY . .
 
 # install libraries for bar/qr codes reading
-RUN apt-get update
-RUN apt-get install -y libgl1-mesa-glx
-RUN apt-get install -y libglib2.0-0
-RUN apt-get install -y libzbar0
-
-WORKDIR /app
-COPY . /app
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        libgl1-mesa-glx \
+        libglib2.0-0 \
+        libzbar0 && \
+    pip3 install --no-cache-dir -r requirements.txt && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
 # For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
