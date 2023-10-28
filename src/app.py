@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from scannable_codes.controller import scannable_codes
+import logging
 
 app = Flask(__name__)
 
@@ -12,7 +13,12 @@ def liveness():
     return { 'status': 'Available' }
 
 app.register_blueprint(scannable_codes)
+
+logging.basicConfig(level=logging.INFO)
+
+logging.info('Creating upload folder')
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+logging.info('Upload folder created')
     
 if __name__ == '__main__':
-    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
     app.run(debug=True)
