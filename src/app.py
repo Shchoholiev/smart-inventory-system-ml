@@ -10,6 +10,7 @@ app.config['ALLOWED_EXTENSIONS'] = { 'png', 'jpg', 'jpeg', 'gif' }
 
 @app.route('/health/liveness')
 def liveness():
+    logging.info('liveness called')
     return { 'status': 'Available' }
 
 app.register_blueprint(scannable_codes)
