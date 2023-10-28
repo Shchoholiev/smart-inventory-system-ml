@@ -8,7 +8,8 @@ FROM python:3.11.6-slim-bullseye
 # ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
-COPY . .
+COPY /src .
+COPY /requirements.txt .
 
 # install libraries for bar/qr codes reading
 RUN apt-get update && \
