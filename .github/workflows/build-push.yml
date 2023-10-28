@@ -57,5 +57,5 @@ jobs:
           context: .
           push: true
           # TODO: find a better solution for image name
-          tags: ${{ env.REGISTRY }}/${{ steps.to-lower.image_name }}:${{ steps.get-latest-tag.outputs.tag }}
+          tags: ${{ env.REGISTRY }}/${{ steps.to-lower.outputs.image_name }}:${{ steps.get-latest-tag.outputs.tag }}
           labels: ${{ steps.meta.outputs.labels }}
