@@ -68,7 +68,7 @@ def decode_image():
         delete_file(file_path)
 
         logging.info('Returning response')
-        return jsonify(decoded_objects=response_data)
+        return jsonify(response_data)
     
     logging.error('Invalid file')
     return jsonify(error='Invalid file'), 400
