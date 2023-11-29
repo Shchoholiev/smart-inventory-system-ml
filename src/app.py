@@ -1,9 +1,11 @@
 import os
 from flask import Flask
+from flask_cors import CORS
 from scannable_codes.controller import scannable_codes
 import logging
 
 app = Flask(__name__)
+CORS(app)
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 app.config['ALLOWED_EXTENSIONS'] = { 'png', 'jpg', 'jpeg', 'gif' }
